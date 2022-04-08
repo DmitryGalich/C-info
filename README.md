@@ -69,7 +69,7 @@ Plain old data(POD). Как сделать POD-классы/структуры \
 deadlock, состояние гонки \
 Отличие процесса от потока \
 Виды guard-ов \
-condition variable
+condition variable \
 https://habr.com/ru/post/517918/
 
 ## Функции
