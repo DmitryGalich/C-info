@@ -32,23 +32,36 @@ https://habr.com/ru/post/478124/
 
 ## **Сколько памяти занимает класс**
 
-To a first order approximation, the size of an object is the sum of the sizes of its constituent data members. You can be sure it will never be smaller than this.
+В первом приближении размер объекта представляет собой сумму размеров составляющих его элементов данных. Вы можете быть уверены, что он никогда не будет меньше, чем это.
 
-More precisely, the compiler is entitled to insert padding space between data members to ensure that each data member meets the alignment requirements of the platform. Some platforms are very strict about alignment, while others (x86) are more forgiving, but will perform significantly better with proper alignment. So, even the compiler optimization setting can affect the object size.
+Точнее, компилятор имеет право вставлять пробел между элементами данных, чтобы гарантировать, что каждый элемент данных соответствует требованиям платформы к выравниванию. Некоторые платформы очень строго относятся к выравниванию, в то время как другие (x86) более снисходительны, но будут работать значительно лучше при правильном выравнивании. Таким образом, даже настройка оптимизации компилятора может повлиять на размер объекта.
 
-Inheritance and virtual functions add an additional complication. As others have said, the member functions of your class themselves do not take up "per object" space, but the existence of virtual functions in that class's interface generally implies the existence of a virtual table, essentially a lookup table of function pointers used to dynamically resolve the proper function implementation to call at runtime. The virtual table (vtbl) is accessed generally via a pointer stored in each object.
+Наследование и виртуальные функции добавляют дополнительную сложность. Как уже говорили другие, сами функции-члены вашего класса не занимают пространство «для каждого объекта», но существование виртуальных функций в интерфейсе этого класса обычно подразумевает существование виртуальной таблицы, по сути таблицы поиска указателей функций, используемых для динамически разрешать правильную реализацию функции для вызова во время выполнения. Доступ к виртуальной таблице (vtbl) обычно осуществляется через указатель, хранящийся в каждом объекте.
 
-Derived class objects also include all data members of their base classes.
+Объекты производного класса также включают в себя все элементы данных своих базовых классов.
 
-Finally, access specifiers (public, private, protected) grant the compiler certain leeway with packing of data members.
+Наконец, спецификаторы доступа (public, private, protected) предоставляют компилятору определенную свободу действий при упаковке элементов данных.
 
-The short answer is that sizeof(myObj) or sizeof(MyClass) will always tell you the proper size of an object, but its result is not always easy to predict.
+Короткий ответ заключается в том, что sizeof(myObj) или sizeof(MyClass) всегда будут указывать правильный размер объекта, но его результат не всегда легко предсказать.
 
 ## **Указатель на функцию. Как использовать?**
 https://metanit.com/cpp/tutorial/4.8.php#:~:text=%D0%A3%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D1%8C%20%D0%BD%D0%B0%20%D1%84%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8E%20(function%20pointer,%D0%B8%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B0%D1%82%D1%8C%20%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%20%D0%B5%D0%B5%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B.
 
-Умные указатели \
-Итераторы \
+## **Умные указатели** 
+* unique_ptr представляет исключительное владение: может быть только один unique ptr, указывающий на объект. и этот объект удаляется при уничтожении указателя unique_ptr.
+* shared_ptr представляет совместное владение: может иметься много указателей shared_ptr, указывающих на объект, и объект удаляется только при уничтожении последнего указателя shared_ptr.
+* weak_ptr - без счётчика
+
+
+## **Итераторы**
+
+* Итератор указывает (ссылается) на элемент последовательности (или за последний элемент).
+* Два итератора можно сравнивать с помощью операторов = и ! =
+* Значение элемента, на который указывает итератор, можно получить с помощью унарного оператора * ("разыменование").
+* Итератор на следующий элемент можно получить с помощью оператора ++.
+* Итераторы используются в качестве средства связи между нашим кодом
+(алгоритмами) и нашими данными .
+
 std::move() \
 std::optional \
 rvalue и lvalue \
