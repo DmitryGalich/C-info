@@ -62,6 +62,10 @@ https://www.youtube.com/watch?v=aYM7lksQ8yg
 * ```shared_ptr``` представляет совместное владение: может иметься много указателей ```shared_ptr```, указывающих на объект, и объект удаляется только при уничтожении последнего указателя ```shared_ptr```.
 * ```weak_ptr``` -  ```shared_ptr``` без счётчика
 
+## **Исключения**
+https://tproger.ru/articles/iskljuchenija-v-cpp-tipy-sintaksis-i-obrabotka/
+https://tproger.ru/articles/isklyucheniya-v-c-garantii-bezopasnosti-i-specifikacii/
+
 ## **Итераторы**
 
 * Итератор указывает (ссылается) на элемент последовательности (или за последний элемент).
