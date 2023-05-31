@@ -492,3 +492,118 @@ PIMPL \
 Коорутины \
 YAGNI \
 One definition rule
+
+# Вопросы:
+
+1. Назовите основные отличия C++ от С
+
+2. "new" —это оператор или ключевое слово языка?
+
+Что делает код:
+```ClassA* c1 = (ClassA*) malloc(100);if (c1) ::new (c1) ClassA("Obj1");```
+
+б. Возможно ли скопировать ClassA следующим способом:
+```
+ClassA* c2 = (ClassA*) malloc(100);
+memcpy(c2, c1, 100);
+```
+
+3. Какие проблемы может вызвать следующий код?  
+```
+class Foo {
+      public:
+            operator int() const {
+                return *this;
+            }
+};  
+
+int main()
+{
+    Foo foo;
+    int i = foo;
+    return i;
+}
+```
+4. Какие проблемы может вызвать следующий код?  
+```
+class Base  {
+    public:
+        Base() {
+            init();
+        }      
+        ~Base() {}
+        
+        virtual void log() = 0;
+    
+    private:
+        void init() {
+            log();
+        }  
+    };
+    
+class Derived: public Base  {
+    public:
+        Derived() {}
+        ~Derived() {}
+        
+        virtual void log() {
+            std::cout << "Derived created" << std::endl; 
+        }
+};
+```
+5. Найдите ошибку в кодеunsigned 
+```
+int i;
+for (i = 100; i >= 0; --i)
+    printf("%d\n", i);
+```
+6. Какое условие проверяется ниже:
+```
+((n & (n – 1)) == 0)
+```
+б. Какие потенциальные ошибки вы видите в коде:
+```
+QList<int> list;
+list << 12 << 20 << 14 << 5 << 4 << 11 << 9 << 5 << 10 << 30;  
+
+QList<int>::iterator i;
+for (i = list.begin(); i != list.end(); ++i) 
+{    
+    if (*i > 10)
+          i = list.erase(i);
+}
+```
+в. Какие потенциальные ошибки вы видите в коде:  
+```
+...........  
+QList<T> Foo::bar() const;
+...............   
+for (i = foo.bar().begin(); i != foo.bar().end(); ++i)  {    
+    // ...  
+}
+```
+7. Исключения из какой функции смогут попасть в обработчик?
+```
+try {
+    std::thread thr(produce1());      
+    produce2();
+    thr.join();
+} catch(...) {
+    std::cout << "Catched1" << std::endl;
+}
+```
+8. Перечислите контейнеры в Qt вы знаете?
+а. В какой момент произойдет копирование  list1?
+```
+QList<int> list1;
+QList<int> list2;
+list1 << 3 << 7<< 13;
+list2 = list1;
+list2[0] = d;
+```
+9. Назовите основные классы компоновки Qt. 
+
+10. Представьте себе окно текстового редактора. Назовите Qt виджеты, которые могут составлять его интерфейс.
+
+11. Какие механизмы профилирования C++/C кода вы знаете/применяли?
+
