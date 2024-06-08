@@ -24,7 +24,7 @@ public:
 
     // 5
     Object(Object &&obj) noexcept;
-    Object &operator=(Object &&obj);
+    Object &operator=(Object &&obj) noexcept;
 
 private:
     void handleCopy(const Object &obj);
@@ -79,7 +79,7 @@ Object::Object(Object &&obj) noexcept
     handleMove(std::move(obj));
 };
 
-Object &Object::operator=(Object &&obj)
+Object &Object::operator=(Object &&obj) noexcept
 {
     if (&obj == this)
         return *this;
